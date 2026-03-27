@@ -11,9 +11,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+
 #[Fillable(['name', 'last_name', 'clave_institucional', 'email', 'password', 'rol_id', 'active'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
@@ -44,5 +47,18 @@ class User extends Authenticatable
     public function inscripciones()
     {
         return $this->hasMany(Inscripcion::class, 'alumno_id');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return $this->rol && $this->rol->name === 'Administrador';
+        }
+
+        if ($panel->getId() === 'profesor') {
+            return $this->rol && ($this->rol->name === 'Profesor' || $this->rol->name === 'Administrador');
+        }
+
+        return true;
     }
 }

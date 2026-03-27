@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Inscripcions;
+namespace App\Filament\Profesor\Resources\Grupos;
 
-use App\Filament\Resources\Inscripcions\Pages\CreateInscripcion;
-use App\Filament\Resources\Inscripcions\Pages\EditInscripcion;
-use App\Filament\Resources\Inscripcions\Pages\ListInscripcions;
-use App\Filament\Resources\Inscripcions\Schemas\InscripcionForm;
-use App\Filament\Resources\Inscripcions\Tables\InscripcionsTable;
-use App\Models\Inscripcion;
+use App\Filament\Profesor\Resources\Grupos\Pages\CreateGrupo;
+use App\Filament\Profesor\Resources\Grupos\Pages\EditGrupo;
+use App\Filament\Profesor\Resources\Grupos\Pages\ListGrupos;
+use App\Filament\Profesor\Resources\Grupos\Schemas\GrupoForm;
+use App\Filament\Profesor\Resources\Grupos\Tables\GruposTable;
+use App\Models\Grupo;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,23 +16,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class InscripcionResource extends Resource
+class GrupoResource extends Resource
 {
-    protected static ?string $model = Inscripcion::class;
-
-    protected static ?string $modelLabel = 'Inscripción';
-    protected static ?string $pluralModelLabel = 'Inscripciones';
+    protected static ?string $model = Grupo::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
     {
-        return InscripcionForm::configure($schema);
+        return GrupoForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return InscripcionsTable::configure($table);
+        return GruposTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -45,9 +42,9 @@ class InscripcionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListInscripcions::route('/'),
-            'create' => CreateInscripcion::route('/create'),
-            'edit' => EditInscripcion::route('/{record}/edit'),
+            'index' => ListGrupos::route('/'),
+            'create' => CreateGrupo::route('/create'),
+            'edit' => EditGrupo::route('/{record}/edit'),
         ];
     }
 
@@ -57,5 +54,11 @@ class InscripcionResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('profesor_id', auth()->id());
     }
 }

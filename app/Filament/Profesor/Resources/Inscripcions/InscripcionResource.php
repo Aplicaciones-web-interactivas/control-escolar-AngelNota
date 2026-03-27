@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Inscripcions;
+namespace App\Filament\Profesor\Resources\Inscripcions;
 
-use App\Filament\Resources\Inscripcions\Pages\CreateInscripcion;
-use App\Filament\Resources\Inscripcions\Pages\EditInscripcion;
-use App\Filament\Resources\Inscripcions\Pages\ListInscripcions;
-use App\Filament\Resources\Inscripcions\Schemas\InscripcionForm;
-use App\Filament\Resources\Inscripcions\Tables\InscripcionsTable;
+use App\Filament\Profesor\Resources\Inscripcions\Pages\CreateInscripcion;
+use App\Filament\Profesor\Resources\Inscripcions\Pages\EditInscripcion;
+use App\Filament\Profesor\Resources\Inscripcions\Pages\ListInscripcions;
+use App\Filament\Profesor\Resources\Inscripcions\Schemas\InscripcionForm;
+use App\Filament\Profesor\Resources\Inscripcions\Tables\InscripcionsTable;
 use App\Models\Inscripcion;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -19,9 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class InscripcionResource extends Resource
 {
     protected static ?string $model = Inscripcion::class;
-
-    protected static ?string $modelLabel = 'Inscripción';
-    protected static ?string $pluralModelLabel = 'Inscripciones';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -57,5 +54,11 @@ class InscripcionResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereHas('grupo', fn($q) => $q->where('profesor_id', auth()->id()));
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Calificacions;
+namespace App\Filament\Profesor\Resources\Calificacions;
 
-use App\Filament\Resources\Calificacions\Pages\CreateCalificacion;
-use App\Filament\Resources\Calificacions\Pages\EditCalificacion;
-use App\Filament\Resources\Calificacions\Pages\ListCalificacions;
-use App\Filament\Resources\Calificacions\Schemas\CalificacionForm;
-use App\Filament\Resources\Calificacions\Tables\CalificacionsTable;
+use App\Filament\Profesor\Resources\Calificacions\Pages\CreateCalificacion;
+use App\Filament\Profesor\Resources\Calificacions\Pages\EditCalificacion;
+use App\Filament\Profesor\Resources\Calificacions\Pages\ListCalificacions;
+use App\Filament\Profesor\Resources\Calificacions\Schemas\CalificacionForm;
+use App\Filament\Profesor\Resources\Calificacions\Tables\CalificacionsTable;
 use App\Models\Calificacion;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -19,9 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CalificacionResource extends Resource
 {
     protected static ?string $model = Calificacion::class;
-
-    protected static ?string $modelLabel = 'Calificación';
-    protected static ?string $pluralModelLabel = 'Calificaciones';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -57,5 +54,11 @@ class CalificacionResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereHas('inscripcion.grupo', fn($q) => $q->where('profesor_id', auth()->id()));
     }
 }
