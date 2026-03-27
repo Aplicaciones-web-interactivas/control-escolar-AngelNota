@@ -59,6 +59,10 @@ class User extends Authenticatable implements FilamentUser
             return $this->rol && ($this->rol->name === 'Profesor' || $this->rol->name === 'Administrador');
         }
 
+        if ($panel->getId() === 'alumno') {
+            return $this->rol && ($this->rol->name === 'Alumno' || $this->rol->name === 'Administrador');
+        }
+
         return true;
     }
 }
