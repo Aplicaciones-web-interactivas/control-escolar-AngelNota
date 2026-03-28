@@ -17,13 +17,23 @@ class CalificacionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('inscripcion_id')
-                    
-                    ->sortable(),
+                TextColumn::make('inscripcion.alumno.name')
+                    ->label('Alumno')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('inscripcion.grupo.materia.name')
+                    ->label('Materia')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('inscripcion.grupo.name')
+                    ->label('Grupo')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('calificacion')
-                    
+                    ->label('Calificación')
                     ->sortable(),
                 TextColumn::make('tipo_evaluacion')
+                    ->label('Tipo de Evaluación')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

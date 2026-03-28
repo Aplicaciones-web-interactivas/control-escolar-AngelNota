@@ -11,12 +11,19 @@ class InscripcionForm
     {
         return $schema
             ->components([
-                TextInput::make('grupo_id')
-                    ->required()
-                    ,
-                TextInput::make('alumno_id')
-                    ->required()
-                    ,
+                \Filament\Forms\Components\Select::make('grupo_id')
+                    ->label('Grupo')
+                    ->relationship('grupo', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (\App\Models\Grupo $record) => "{$record->materia->name} ({$record->name})")
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                \Filament\Forms\Components\Select::make('alumno_id')
+                    ->label('Alumno')
+                    ->relationship('alumno', 'name', fn (\Illuminate\Database\Eloquent\Builder $query) => $query->whereHas('rol', fn ($q) => $q->where('name', 'Alumno')))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
             ]);
     }
 }

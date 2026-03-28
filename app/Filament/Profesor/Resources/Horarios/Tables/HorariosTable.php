@@ -17,9 +17,14 @@ class HorariosTable
     {
         return $table
             ->columns([
-                TextColumn::make('grupo_id')
-                    
-                    ->sortable(),
+                TextColumn::make('grupo.materia.name')
+                    ->label('Materia')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('grupo.name')
+                    ->label('Grupo')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('dia')
                     ->searchable(),
                 TextColumn::make('hora_inicio')
@@ -36,23 +41,14 @@ class HorariosTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
+                \Filament\Actions\ViewAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
+            ->bulkActions([
             ]);
     }
 }

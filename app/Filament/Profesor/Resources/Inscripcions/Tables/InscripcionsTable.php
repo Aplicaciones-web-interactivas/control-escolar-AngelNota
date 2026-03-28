@@ -17,16 +17,22 @@ class InscripcionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('grupo_id')
-                    
-                    ->sortable(),
-                TextColumn::make('alumno_id')
-                    
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
+                TextColumn::make('grupo.materia.name')
+                    ->label('Materia')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
+                TextColumn::make('grupo.name')
+                    ->label('Grupo')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('alumno.name')
+                    ->label('Alumno')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('created_at')
+                    ->label('Fecha de Inscripción')
+                    ->dateTime()
+                    ->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

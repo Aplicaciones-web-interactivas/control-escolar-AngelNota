@@ -17,42 +17,27 @@ class EntregasTable
     {
         return $table
             ->columns([
-                TextColumn::make('tarea_id')
-                    
-                    ->sortable(),
-                TextColumn::make('alumno_id')
-                    
-                    ->sortable(),
+                TextColumn::make('tarea.titulo')
+                    ->label('Tarea')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('archivo_pdf')
+                    ->label('Archivo Entregado')
                     ->searchable(),
                 TextColumn::make('calificacion_obtenida')
-                    
-                    ->sortable(),
+                    ->label('Calificación'),
                 TextColumn::make('created_at')
+                    ->label('Fecha de Entrega')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
+                \Filament\Actions\ViewAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
+            ->bulkActions([
             ]);
     }
 }

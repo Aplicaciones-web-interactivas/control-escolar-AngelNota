@@ -60,4 +60,8 @@ class EntregaResource extends Resource
     {
         return parent::getEloquentQuery()->where('alumno_id', auth()->id());
     }
+
+    public static function canCreate(): bool { return false; }
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool { return false; }
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool { return false; }
 }

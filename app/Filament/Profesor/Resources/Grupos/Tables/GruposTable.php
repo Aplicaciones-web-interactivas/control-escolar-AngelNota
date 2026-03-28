@@ -18,13 +18,16 @@ class GruposTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Grupo')
                     ->searchable(),
-                TextColumn::make('materia_id')
-                    
-                    ->sortable(),
-                TextColumn::make('profesor_id')
-                    
-                    ->sortable(),
+                TextColumn::make('materia.name')
+                    ->label('Materia')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('profesor.name')
+                    ->label('Profesor')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -42,14 +45,9 @@ class GruposTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
+                \Filament\Actions\ViewAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
+            ->bulkActions([
             ]);
     }
 }

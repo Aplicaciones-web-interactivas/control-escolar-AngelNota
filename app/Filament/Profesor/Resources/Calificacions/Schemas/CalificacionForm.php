@@ -11,13 +11,18 @@ class CalificacionForm
     {
         return $schema
             ->components([
-                TextInput::make('inscripcion_id')
-                    ->required()
-                    ,
-                TextInput::make('calificacion')
-                    ->required()
-                    ,
-                TextInput::make('tipo_evaluacion')
+                \Filament\Forms\Components\Select::make('inscripcion_id')
+                    ->label('Inscripción (Alumno - Materia/Grupo)')
+                    ->relationship('inscripcion', 'id')
+                    ->getOptionLabelFromRecordUsing(fn (\App\Models\Inscripcion $record) => "{$record->alumno->name} - {$record->grupo->materia->name} ({$record->grupo->name})")
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                \Filament\Forms\Components\TextInput::make('calificacion')
+                    ->label('Calificación')
+                    ->required(),
+                \Filament\Forms\Components\TextInput::make('tipo_evaluacion')
+                    ->label('Tipo de Evaluación')
                     ->required(),
             ]);
     }

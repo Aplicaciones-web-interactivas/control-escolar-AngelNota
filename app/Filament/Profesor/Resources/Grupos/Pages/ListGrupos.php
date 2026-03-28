@@ -18,7 +18,6 @@ class ListGrupos extends ListRecords
             ExportAction::make()->exports([
                 ExcelExport::make('table')->fromTable()
             ]),
-            CreateAction::make(),
         ];
     }
 }
