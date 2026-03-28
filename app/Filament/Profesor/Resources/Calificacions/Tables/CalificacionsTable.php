@@ -18,10 +18,10 @@ class CalificacionsTable
         return $table
             ->columns([
                 TextColumn::make('inscripcion_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('calificacion')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('tipo_evaluacion')
                     ->searchable(),

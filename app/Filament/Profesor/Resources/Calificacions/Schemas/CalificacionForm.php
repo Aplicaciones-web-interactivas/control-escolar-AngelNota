@@ -13,10 +13,10 @@ class CalificacionForm
             ->components([
                 TextInput::make('inscripcion_id')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('calificacion')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('tipo_evaluacion')
                     ->required(),
             ]);

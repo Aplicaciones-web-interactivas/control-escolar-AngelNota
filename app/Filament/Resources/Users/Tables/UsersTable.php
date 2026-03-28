@@ -31,7 +31,7 @@ class UsersTable
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('rol_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 IconColumn::make('active')
                     ->boolean(),

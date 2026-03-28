@@ -18,7 +18,7 @@ class EntregaForm {
                 ->label('Tarea a Entregar'),
             Hidden::make('alumno_id')->default(fn () => auth()->id()),
             FileUpload::make('archivo_pdf')->acceptedFileTypes(['application/pdf'])->required()->label('Archivo PDF'),
-            TextInput::make('calificacion_obtenida')->numeric()->disabled()->default(null)->label('Calificación Obtenida'),
+            TextInput::make('calificacion_obtenida')->disabled()->default(null)->label('Calificación Obtenida'),
         ]);
     }
 }

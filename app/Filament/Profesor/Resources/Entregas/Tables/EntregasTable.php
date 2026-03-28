@@ -18,15 +18,15 @@ class EntregasTable
         return $table
             ->columns([
                 TextColumn::make('tarea_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('alumno_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('archivo_pdf')
                     ->searchable(),
                 TextColumn::make('calificacion_obtenida')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -28,7 +28,7 @@ class UserForm
                     ->password()
                     ->required(),
                 TextInput::make('rol_id')
-                    ->numeric()
+                    
                     ->default(null),
                 Toggle::make('active')
                     ->required(),

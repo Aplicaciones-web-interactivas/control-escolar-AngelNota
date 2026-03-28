@@ -15,7 +15,7 @@ class TareaForm
             ->components([
                 TextInput::make('grupo_id')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('titulo')
                     ->required(),
                 Textarea::make('descripcion')

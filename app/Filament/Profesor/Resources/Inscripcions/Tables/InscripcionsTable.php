@@ -18,10 +18,10 @@ class InscripcionsTable
         return $table
             ->columns([
                 TextColumn::make('grupo_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('alumno_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

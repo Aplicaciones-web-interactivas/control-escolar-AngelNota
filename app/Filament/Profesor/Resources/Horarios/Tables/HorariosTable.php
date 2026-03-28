@@ -18,7 +18,7 @@ class HorariosTable
         return $table
             ->columns([
                 TextColumn::make('grupo_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('dia')
                     ->searchable(),

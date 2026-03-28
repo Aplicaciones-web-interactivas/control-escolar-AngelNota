@@ -20,10 +20,10 @@ class GruposTable
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('materia_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('profesor_id')
-                    ->numeric()
+                    
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

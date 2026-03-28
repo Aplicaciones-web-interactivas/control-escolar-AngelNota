@@ -15,10 +15,10 @@ class GrupoForm
                     ->required(),
                 TextInput::make('materia_id')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('profesor_id')
                     ->required()
-                    ->numeric(),
+                    ,
             ]);
     }
 }

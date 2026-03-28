@@ -13,10 +13,10 @@ class InscripcionForm
             ->components([
                 TextInput::make('grupo_id')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('alumno_id')
                     ->required()
-                    ->numeric(),
+                    ,
             ]);
     }
 }

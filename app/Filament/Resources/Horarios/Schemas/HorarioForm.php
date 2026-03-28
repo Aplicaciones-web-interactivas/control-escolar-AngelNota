@@ -14,7 +14,7 @@ class HorarioForm
             ->components([
                 TextInput::make('grupo_id')
                     ->required()
-                    ->numeric(),
+                    ,
                 TextInput::make('dia')
                     ->required(),
                 TimePicker::make('hora_inicio')
